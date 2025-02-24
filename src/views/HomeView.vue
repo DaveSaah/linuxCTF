@@ -1,3 +1,12 @@
+<script setup lang="ts">
+import { RouterLink } from 'vue-router'
+import { useEmailStore } from '@/stores/user'
+import { ref } from 'vue'
+
+const emailStore = useEmailStore()
+const email = ref('')
+</script>
+
 <template>
   <div class="flex min-h-screen flex-col lato-regular">
     <!-- Hero section -->
@@ -15,12 +24,14 @@
             and advance your skills step by step.
           </p>
           <div class="flex items-center gap-4 flex-row justify-center">
-            <button
-              class="flex bg-green-500 hover:bg-green-600 py-2 px-5 rounded-md items-center cursor-pointer gap-x-2"
-            >
-              Get Started
-              <font-awesome-icon :icon="['fas', 'chevron-right']" />
-            </button>
+            <RouterLink to="/register">
+              <button
+                class="flex bg-green-500 hover:bg-green-600 py-2 px-5 rounded-md items-center cursor-pointer gap-x-2"
+              >
+                Get Started
+                <font-awesome-icon :icon="['fas', 'chevron-right']" />
+              </button>
+            </RouterLink>
             <button
               class="flex items-center border py-2 px-5 rounded-md gap-x-2 border-gray-600 text-white hover:bg-gray-800 hover:text-white w-auto cursor-pointer"
             >
@@ -75,11 +86,19 @@
         </p>
         <div class="flex items-center gap-4 flex-row justify-center">
           <input
+            v-model="email"
             type="email"
             placeholder="Enter your email"
             class="h-12 w-1/4 px-4 rounded-md bg-white/10 text-white placeholder:text-white/70"
           />
-          <button class="bg-black hover:bg-gray-900 py-2 h-12 rounded-md px-3">Sign Up Now</button>
+          <RouterLink to="/register">
+            <button
+              @click="emailStore.setEmail(email)"
+              class="bg-black hover:bg-gray-900 py-2 h-12 rounded-md px-3 cursor-pointer"
+            >
+              Sign Up Now
+            </button>
+          </RouterLink>
         </div>
         <p class="mt-4 text-sm text-white/80 py-4">Free account. No credit card required.</p>
       </div>
