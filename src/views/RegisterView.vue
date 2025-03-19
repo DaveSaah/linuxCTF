@@ -3,7 +3,7 @@ import { useEmailStore } from '@/stores/user'
 import { ref, watch } from 'vue'
 import axios, { AxiosError } from 'axios'
 import Swal from 'sweetalert2' // SweetAlert2 for notifications
-import { HTTP_STATUS } from '@/constants' // Import HTTP status codes
+import { HTTP_STATUS, AUTH_API, COLORS } from '@/constants' // Import HTTP status codes
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -28,8 +28,6 @@ const validation = ref({
   usernameErrMsg: '',
 })
 
-const API_URL = 'http://localhost:3130/register'
-
 // Validate Email
 async function validateEmail() {
   if (!formData.value.email) {
@@ -47,7 +45,7 @@ async function validateEmail() {
   }
 
   try {
-    await axios.get(API_URL, { params: { email: formData.value.email } })
+    await axios.get(AUTH_API.REGISTER, { params: { email: formData.value.email } })
   } catch (error) {
     const axiosError = error as AxiosError<{ message: string }>
     if (
@@ -79,7 +77,7 @@ async function validateUsername() {
   }
 
   try {
-    await axios.get(API_URL, { params: { username: formData.value.username } })
+    await axios.get(AUTH_API.REGISTER, { params: { username: formData.value.username } })
   } catch (error) {
     const axiosError = error as AxiosError<{ message: string }>
     if (
@@ -135,13 +133,13 @@ async function submitForm() {
       icon: 'error',
       title: 'Form Error',
       text: 'Please fix the errors before submitting!',
-      confirmButtonColor: '#d33',
+      confirmButtonColor: COLORS.ERROR,
     })
     return
   }
 
   try {
-    const response = await axios.post(API_URL, {
+    const response = await axios.post(AUTH_API.REGISTER, {
       email: formData.value.email,
       username: formData.value.username,
       password: formData.value.password1,
@@ -151,8 +149,8 @@ async function submitForm() {
       Swal.fire({
         icon: 'success',
         title: 'Registration Successful!',
-        text: 'Welcome to LinuxCTF!',
-        confirmButtonColor: '#28a745',
+        text: 'Sign into your new account',
+        confirmButtonColor: COLORS.SUCCESS,
       }).then(() => {
         router.push('/login')
       })
@@ -164,14 +162,14 @@ async function submitForm() {
         icon: 'error',
         title: 'Registration Failed!',
         text: axiosError.response.data.message,
-        confirmButtonColor: '#d33',
+        confirmButtonColor: COLORS.ERROR,
       })
     } else {
       Swal.fire({
         icon: 'error',
-        title: 'Network Error!',
+        title: 'Server Unavailable!',
         text: 'Could not connect to the server. Please try again later.',
-        confirmButtonColor: '#d33',
+        confirmButtonColor: COLORS.ERROR,
       })
     }
   }
@@ -268,6 +266,10 @@ async function submitForm() {
             Create Account
           </button>
         </form>
+        <p class="text-center pt-4">
+          Already have an account?
+          <RouterLink to="/login" class="text-blue-500">Sign in</RouterLink>
+        </p>
       </div>
     </div>
   </div>
