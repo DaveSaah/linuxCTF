@@ -10,3 +10,15 @@ export const useEmailStore = defineStore('email', {
     },
   },
 })
+
+export const useUsernameStore = defineStore('username', {
+  state: () => {
+    return { username: '' }
+  },
+  persist: true,
+  actions: {
+    setUsername(username: string) {
+      this.username = username
+    },
+  },
+})
