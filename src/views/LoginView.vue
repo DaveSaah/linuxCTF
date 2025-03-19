@@ -1,9 +1,58 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import axios, { AxiosError } from 'axios'
+import Swal from 'sweetalert2'
+import { AUTH_API, COLORS, HTTP_STATUS } from '@/constants'
+import {useUsernameStore} from '@/stores/user'
+import { useRouter } from 'vue-router'
 
-const email = ref('')
-const password = ref('')
+const router = useRouter()
+
+const formData = ref({
+  email: '',
+  password: '',
+})
+
+const usernameStore = useUsernameStore()
+
+async function submitForm() {
+  try {
+    const response = await axios.post(AUTH_API.LOGIN, {
+      email: formData.value.email,
+      password: formData.value.password,
+    })
+    if (response.status === HTTP_STATUS.OK) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Login Successful!',
+        text: 'Welcome to LinuxCTF',
+        confirmButtonColor: COLORS.SUCCESS,
+      }).then(() => {
+        usernameStore.setUsername(response.data.username)
+        router.push('/dashboard')
+      })
+    }
+  } catch (error) {
+    const axiosError = error as AxiosError<{ message: string }>
+    if (axiosError.response?.data?.message) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Login Failed!',
+        text: axiosError.response.data.message,
+        confirmButtonColor: COLORS.ERROR,
+      })
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Server Unavailable!',
+        text: 'Could not connect to the server. Please try again later.',
+        confirmButtonColor: COLORS.ERROR,
+      })
+    }
+  }
+}
 </script>
+
 <template>
   <div class="flex flex-col lato-regular">
     <div class="relative overflow-hidden bg-black text-white">
@@ -22,12 +71,12 @@ const password = ref('')
         <p class="text-gray-500">Sign in to your account to continue</p>
       </div>
       <div class="bg-white p-12 rounded-md shadow-lg">
-        <form class="flex flex-col gap-6">
+        <form class="flex flex-col gap-6" @submit.prevent="submitForm">
           <div class="flex flex-col gap-2">
             <label for="email">Email</label>
             <input
               type="email"
-              v-model="email"
+              v-model="formData.email"
               name="email"
               class="border-black border-b p-2 w-72 outline-0"
               required
@@ -37,7 +86,7 @@ const password = ref('')
             <label for="password">Password</label>
             <input
               type="password"
-              v-model="password"
+              v-model="formData.password"
               name="password"
               class="border-black border-b p-2 w-72 outline-0"
               required
