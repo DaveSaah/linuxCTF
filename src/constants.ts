@@ -14,6 +14,7 @@ export const AUTH_API = {
   REGISTER: 'http://localhost:3130/register',
   DELETE: 'http://localhost:3130/delete',
   UPDATE: 'http://localhost:3130/update',
+  IS_AUTHENTICATED: 'http://localhost:3130/authenticated',
 } as const
 
 export const COLORS = {
