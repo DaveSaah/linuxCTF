@@ -10,7 +10,7 @@ export const HTTP_STATUS = {
 
 export const AUTH_API = {
   LOGIN: 'http://localhost:3130/login',
-  LOGOUT: 'http://localhost:3130/logout',
+  LOGOUT: 'http://localhost:3130/user/logout',
   REGISTER: 'http://localhost:3130/register',
   DELETE: 'http://localhost:3130/delete',
   UPDATE: 'http://localhost:3130/update',
