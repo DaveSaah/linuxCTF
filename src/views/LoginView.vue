@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import axios, { AxiosError } from 'axios'
 import Swal from 'sweetalert2'
 import { AUTH_API, COLORS, HTTP_STATUS } from '@/constants'
-import {useUsernameStore} from '@/stores/user'
+import { useUsernameStore } from '@/stores/user'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -17,10 +17,16 @@ const usernameStore = useUsernameStore()
 
 async function submitForm() {
   try {
-    const response = await axios.post(AUTH_API.LOGIN, {
-      email: formData.value.email,
-      password: formData.value.password,
-    })
+    const response = await axios.post(
+      AUTH_API.LOGIN,
+      {
+        email: formData.value.email,
+        password: formData.value.password,
+      },
+      {
+        withCredentials: true,
+      },
+    )
     if (response.status === HTTP_STATUS.OK) {
       Swal.fire({
         icon: 'success',
