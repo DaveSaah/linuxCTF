@@ -70,13 +70,13 @@ async function submitForm() {
         </RouterLink>
       </div>
     </div>
-    <div class="flex flex-col justify-center items-center gap-3 py-52 bg-gray-100">
+    <div class="flex flex-col justify-center items-center gap-3 py-20">
       <div class="py-6 text-center">
         <font-awesome-icon class="text-green-500 py-1 text-3xl" :icon="['fas', 'terminal']" />
         <h1 class="font-bold text-3xl">Welcome back</h1>
         <p class="text-gray-500">Sign in to your account to continue</p>
       </div>
-      <div class="bg-white p-12 rounded-md shadow-lg">
+      <div class="p-12 rounded-md shadow-2xl bg-gray-50">
         <form class="flex flex-col gap-6" @submit.prevent="submitForm">
           <div class="flex flex-col gap-2">
             <label for="email">Email</label>

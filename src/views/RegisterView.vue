@@ -190,14 +190,14 @@ async function submitForm() {
     </div>
 
     <!-- Registration Form -->
-    <div class="flex flex-col justify-center items-center gap-3 py-20 bg-gray-100">
+    <div class="flex flex-col justify-center items-center gap-3 py-16">
       <div class="py-6 text-center">
         <font-awesome-icon class="text-green-500 py-1 text-3xl" :icon="['fas', 'terminal']" />
         <h1 class="font-bold text-3xl">Create your account</h1>
         <p class="text-gray-500">Start your Linux journey today</p>
       </div>
 
-      <div class="bg-white p-12 rounded-md shadow-lg">
+      <div class="bg-gray-50 p-12 rounded-md shadow-2xl">
         <form class="flex flex-col gap-6" @submit.prevent="submitForm">
           <!-- Username -->
           <div class="flex flex-col gap-2">
