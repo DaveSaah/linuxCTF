@@ -1,12 +1,19 @@
 import {
-  faChevronRight,
-  faUpRightFromSquare,
-  faTerminal,
-  faPuzzlePiece,
-  faChartLine,
-  faComments,
-  faUsers,
-  faStopwatch,
+    faAward,
+    faChartLine,
+    faChevronRight,
+    faComments,
+    faFlag,
+    faGraduationCap,
+    faMapLocationDot,
+    faPuzzlePiece,
+    faStopwatch,
+    faTerminal,
+    faUpRightFromSquare,
+    faUserGroup,
+    faBookOpen,
+    faUsers,
+    faArrowRightFromBracket,
 } from '@fortawesome/free-solid-svg-icons'
 
 const iconPack = [
@@ -18,6 +25,13 @@ const iconPack = [
   faComments,
   faUsers,
   faStopwatch,
+  faMapLocationDot,
+  faFlag,
+  faAward,
+  faGraduationCap,
+  faUserGroup,
+  faBookOpen,
+  faArrowRightFromBracket,
 ]
 
 export default iconPack
