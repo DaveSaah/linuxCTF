@@ -3,21 +3,36 @@ import HomeView from '../views/HomeView.vue'
 import axios, { AxiosError } from 'axios'
 import { AUTH_API, HTTP_STATUS } from '@/constants'
 
-async function isAuthenticated() {
+async function isAuthenticated(): Promise<boolean> {
   try {
-    const response = await axios.get(AUTH_API.IS_AUTHENTICATED, { withCredentials: true })
-    if (response.status == HTTP_STATUS.OK) {
-      return true
+    const response = await axios.get(AUTH_API.IS_AUTHENTICATED, { withCredentials: true });
+    if (response.status === HTTP_STATUS.OK) {
+      return true;
     }
   } catch (error) {
-    const axiosError = error as AxiosError
-    if (axiosError.response?.status == HTTP_STATUS.UNAUTHORIZED) {
-      return false
+    const axiosError = error as AxiosError;
+    if (axiosError.response?.status === HTTP_STATUS.UNAUTHORIZED) {
+      return false;
     }
+  }
+  return false; // Ensure a boolean is always returned
+}
+
+async function requireAuth(to: any, from: any, next: any) {
+  if (await isAuthenticated()) {
+    next()
+  } else {
+    next('/login')
   }
 }
 
-const authenticated = await isAuthenticated()
+async function redirectIfAuthenticated(to: any, from: any, next: any) {
+  if (await isAuthenticated()) {
+    next('/dashboard')
+  } else {
+    next()
+  }
+}
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,37 +45,19 @@ const router = createRouter({
     {
       path: '/register',
       name: 'register',
-      beforeEnter: (to, from, next) => {
-        if (authenticated) {
-          next('/dashboard')
-        } else {
-          next()
-        }
-      },
+      beforeEnter: redirectIfAuthenticated,
       component: () => import('../views/RegisterView.vue'),
     },
     {
       path: '/login',
       name: 'login',
-      beforeEnter: (to, from, next) => {
-        if (authenticated) {
-          next('/dashboard')
-        } else {
-          next()
-        }
-      },
+      beforeEnter: redirectIfAuthenticated,
       component: () => import('../views/LoginView.vue'),
     },
     {
       path: '/dashboard',
-      beforeEnter: (to, from, next) => {
-        if (authenticated) {
-          next()
-        } else {
-          next('/login')
-        }
-      },
       name: 'dashboard',
+      beforeEnter: requireAuth,
       component: () => import('../views/DashboardView.vue'),
     },
   ],
