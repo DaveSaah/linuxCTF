@@ -8,7 +8,7 @@ const email = ref('')
 </script>
 
 <template>
-  <div class="flex min-h-screen flex-col lato-regular">
+  <div class="flex min-h-screen flex-col">
     <!-- Hero section -->
     <section class="relative overflow-hidden bg-black py-32 text-white">
       <div class="absolute inset-0 bg-gradient-to-br from-gray-900 to-black" />

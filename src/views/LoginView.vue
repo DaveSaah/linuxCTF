@@ -60,7 +60,7 @@ async function submitForm() {
 </script>
 
 <template>
-  <div class="flex flex-col lato-regular">
+  <div class="flex flex-col">
     <div class="relative overflow-hidden bg-black text-white">
       <div class="absolute inset-0 bg-gradient-to-br from-gray-900 to-black" />
       <div class="absolute inset-0 opacity-30 bg-custom"></div>
