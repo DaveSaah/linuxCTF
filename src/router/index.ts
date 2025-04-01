@@ -73,6 +73,33 @@ const router = createRouter({
       name: 'dashboard',
       beforeEnter: requireAuth,
       component: () => import('@/views/DashboardView.vue'),
+      redirect: '/learning-paths',
+      children: [
+        {
+          path: '/learning-paths',
+          name: 'learning-paths',
+          beforeEnter: requireAuth,
+          component: () => import('@/views/LearningPathsView.vue'),
+        },
+        {
+          path: '/ctf-challenges',
+          name: 'ctf-challenges',
+          beforeEnter: requireAuth,
+          component: () => import('@/views/CtfChallengesView.vue'),
+        },
+        {
+          path: '/achievements',
+          name: 'achievements',
+          beforeEnter: requireAuth,
+          component: () => import('@/views/AchievementsView.vue'),
+        },
+        {
+          path: '/progress',
+          name: 'progress',
+          beforeEnter: requireAuth,
+          component: () => import('@/views/ProgressView.vue'),
+        }
+      ],
     },
   ],
 })

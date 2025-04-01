@@ -29,11 +29,11 @@ const usernameStore = useUsernameStore()
 
   <div class="flex pt-[60px]">
     <NavBar class="fixed left-0 top-[60px]" />
-    <!-- main content: make div scrollable; freeze all elements above -->
-    <div class="flex-1 overflow-y-auto h-[calc(100vh-60px)] scroll-smooth main">
-      <div class="p-6">
+    <div class="flex-1 overflow-y-auto h-[calc(100vh-60px)] scroll-smooth main p-6">
+      <div>
         <p>Welcome, {{ usernameStore.username }}</p>
       </div>
+      <RouterView />
     </div>
   </div>
 </template>

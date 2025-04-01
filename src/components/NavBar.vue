@@ -86,37 +86,45 @@ export default {
       <!-- Nav items -->
       <nav class="font-medium text-gray-500">
         <div class="h-2"></div>
-        <div
-          class="flex items-center gap-x-3 py-1 hover:bg-gray-200 hover:text-black cursor-pointer rounded-lg"
+        <RouterLink
+          to="/learning-paths"
+          class="flex items-center gap-x-3 py-1 hover:bg-gray-200 hover:text-black cursor-pointer"
+          active-class="text-black bg-gray-200"
         >
           <div class="w-1"></div>
           <font-awesome-icon :icon="['fas', 'map-location-dot']" />
           <p>Learning Paths</p>
-        </div>
+        </RouterLink>
         <div class="h-2"></div>
-        <div
-          class="flex items-center gap-x-3 py-1 hover:bg-gray-200 hover:text-black cursor-pointer rounded-lg"
+        <RouterLink
+          to="/ctf-challenges"
+          class="flex items-center gap-x-3 py-1 hover:bg-gray-200 hover:text-black cursor-pointer"
+          active-class="text-black bg-gray-200"
         >
           <div class="w-1"></div>
           <font-awesome-icon :icon="['fas', 'flag']" />
           <p>CTF Challenges</p>
-        </div>
+        </RouterLink>
         <div class="h-2"></div>
-        <div
-          class="flex items-center gap-x-3 py-1 hover:bg-gray-200 hover:text-black cursor-pointer rounded-lg"
+        <RouterLink
+          to="/achievements"
+          active-class="text-black bg-gray-200"
+          class="flex items-center gap-x-3 py-1 hover:bg-gray-200 hover:text-black cursor-pointer"
         >
           <div class="w-1"></div>
           <font-awesome-icon :icon="['fas', 'award']" />
           <p>Achievements</p>
-        </div>
+        </RouterLink>
         <div class="h-2"></div>
-        <div
-          class="flex items-center gap-x-3 py-1 hover:bg-gray-200 hover:text-black cursor-pointer rounded-lg"
+        <RouterLink
+          to="/progress"
+          active-class="text-black bg-gray-200"
+          class="flex items-center gap-x-3 py-1 hover:bg-gray-200 hover:text-black cursor-pointer"
         >
           <div class="w-1"></div>
           <font-awesome-icon :icon="['fas', 'graduation-cap']" />
           <p>My Progress</p>
-        </div>
+        </RouterLink>
       </nav>
     </div>
     <div
