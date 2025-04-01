@@ -1,18 +1,16 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import axios, { AxiosError } from 'axios'
-import Swal from 'sweetalert2'
 import { AUTH_API, COLORS, HTTP_STATUS } from '@/constants'
 import { useUsernameStore } from '@/stores/user'
+import axios, { AxiosError } from 'axios'
+import Swal from 'sweetalert2'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-
 const formData = ref({
   email: '',
   password: '',
 })
-
 const usernameStore = useUsernameStore()
 
 async function submitForm() {

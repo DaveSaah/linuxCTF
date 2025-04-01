@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router'
 import { useEmailStore } from '@/stores/user'
 import { ref } from 'vue'
 

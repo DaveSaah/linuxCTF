@@ -1,14 +1,12 @@
 <script setup lang="ts">
+import { AUTH_API, COLORS, HTTP_STATUS } from '@/constants' // Import HTTP status codes
 import { useEmailStore } from '@/stores/user'
-import { ref, watch } from 'vue'
 import axios, { AxiosError } from 'axios'
 import Swal from 'sweetalert2' // SweetAlert2 for notifications
-import { HTTP_STATUS, AUTH_API, COLORS } from '@/constants' // Import HTTP status codes
+import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-
-// Store and reactive state
 const emailStore = useEmailStore()
 const formData = ref({
   username: '',
@@ -16,7 +14,6 @@ const formData = ref({
   password1: '',
   password2: '',
 })
-
 const validation = ref({
   isEmailNotValid: false,
   emailErrMsg: '',
