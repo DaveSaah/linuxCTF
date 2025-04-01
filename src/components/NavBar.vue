@@ -5,6 +5,7 @@ import axios, { AxiosError } from 'axios'
 import Swal from 'sweetalert2'
 import { useRouter } from 'vue-router'
 import { useUsernameStore } from '@/stores/user'
+import NavBtn from '@/components/NavBtn.vue'
 
 const usernameStore = useUsernameStore()
 const router = useRouter()
@@ -62,6 +63,9 @@ async function logout() {
 
 export default {
   name: 'NavBar',
+  components: {
+    NavBtn,
+  },
   // Make available in the template
   setup() {
     return {
@@ -85,46 +89,10 @@ export default {
 
       <!-- Nav items -->
       <nav class="font-medium text-gray-500">
-        <div class="h-2"></div>
-        <RouterLink
-          to="/learning-paths"
-          class="flex items-center gap-x-3 py-1 hover:bg-gray-200 hover:text-black cursor-pointer"
-          active-class="text-black bg-gray-200"
-        >
-          <div class="w-1"></div>
-          <font-awesome-icon :icon="['fas', 'map-location-dot']" />
-          <p>Learning Paths</p>
-        </RouterLink>
-        <div class="h-2"></div>
-        <RouterLink
-          to="/ctf-challenges"
-          class="flex items-center gap-x-3 py-1 hover:bg-gray-200 hover:text-black cursor-pointer"
-          active-class="text-black bg-gray-200"
-        >
-          <div class="w-1"></div>
-          <font-awesome-icon :icon="['fas', 'flag']" />
-          <p>CTF Challenges</p>
-        </RouterLink>
-        <div class="h-2"></div>
-        <RouterLink
-          to="/achievements"
-          active-class="text-black bg-gray-200"
-          class="flex items-center gap-x-3 py-1 hover:bg-gray-200 hover:text-black cursor-pointer"
-        >
-          <div class="w-1"></div>
-          <font-awesome-icon :icon="['fas', 'award']" />
-          <p>Achievements</p>
-        </RouterLink>
-        <div class="h-2"></div>
-        <RouterLink
-          to="/progress"
-          active-class="text-black bg-gray-200"
-          class="flex items-center gap-x-3 py-1 hover:bg-gray-200 hover:text-black cursor-pointer"
-        >
-          <div class="w-1"></div>
-          <font-awesome-icon :icon="['fas', 'graduation-cap']" />
-          <p>My Progress</p>
-        </RouterLink>
+        <NavBtn name="Learning Paths" icon="map-location-dot" path="/learning-paths" />
+        <NavBtn name="Challenges" icon="flag" path="/challenges" />
+        <NavBtn name="Achievements" icon="award" path="/achievements" />
+        <NavBtn name="My Progress" icon="graduation-cap" path="/progress" />
       </nav>
     </div>
     <div

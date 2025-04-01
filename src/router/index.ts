@@ -82,10 +82,10 @@ const router = createRouter({
           component: () => import('@/views/LearningPathsView.vue'),
         },
         {
-          path: '/ctf-challenges',
-          name: 'ctf-challenges',
+          path: '/challenges',
+          name: 'challenges',
           beforeEnter: requireAuth,
-          component: () => import('@/views/CtfChallengesView.vue'),
+          component: () => import('@/views/ChallengesView.vue'),
         },
         {
           path: '/achievements',
