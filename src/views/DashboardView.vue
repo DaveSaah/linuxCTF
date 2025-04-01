@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import { useUsernameStore } from '@/stores/user'
 import NavBar from '@/components/NavBar.vue'
-
-const usernameStore = useUsernameStore()
 </script>
 
 <template>
@@ -30,9 +27,6 @@ const usernameStore = useUsernameStore()
   <div class="flex pt-[60px]">
     <NavBar class="fixed left-0 top-[60px]" />
     <div class="flex-1 overflow-y-auto h-[calc(100vh-60px)] scroll-smooth main p-6">
-      <div>
-        <p>Welcome, {{ usernameStore.username }}</p>
-      </div>
       <RouterView />
     </div>
   </div>
