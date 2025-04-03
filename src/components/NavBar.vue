@@ -1,4 +1,4 @@
-<script lang="ts">
+<script setup lang="ts">
 import dashboardIcon from '@/assets/dashboard.png'
 import { AUTH_API, COLORS, HTTP_STATUS } from '@/constants'
 import axios, { AxiosError } from 'axios'
@@ -59,20 +59,6 @@ async function logout() {
       }
     }
   }
-}
-
-export default {
-  name: 'NavBar',
-  components: {
-    NavBtn,
-  },
-  // Make available in the template
-  setup() {
-    return {
-      dashboardIcon,
-      logout,
-    }
-  },
 }
 </script>
 
