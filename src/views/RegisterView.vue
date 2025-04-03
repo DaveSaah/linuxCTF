@@ -5,6 +5,16 @@ import axios, { AxiosError } from 'axios'
 import Swal from 'sweetalert2' // SweetAlert2 for notifications
 import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
+import { Button } from '@/components/ui/button'
+import { Terminal } from 'lucide-vue-next'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 
 const router = useRouter()
 const emailStore = useEmailStore()
@@ -187,87 +197,93 @@ async function submitForm() {
     </div>
 
     <!-- Registration Form -->
-    <div class="flex flex-col justify-center items-center gap-3 py-16">
-      <div class="py-6 text-center">
-        <font-awesome-icon class="text-green-500 py-1 text-3xl" :icon="['fas', 'terminal']" />
-        <h1 class="font-bold text-3xl">Create your account</h1>
-        <p class="text-gray-500">Start your Linux journey today</p>
-      </div>
+    <div class="flex flex-col justify-center items-center gap-3 py-20">
+      <Card class="p-12 rounded-md shadow-2xl bg-gray-50">
+        <CardHeader>
+          <CardTitle class="flex flex-col justify-center items-center">
+            <Terminal class="text-green-500 w-10 h-10" />
+            <h1 class="font-bold text-3xl">Get Started</h1>
+          </CardTitle>
+          <CardDescription class="flex justify-center"> Explore a whole new world </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form class="flex flex-col gap-6" @submit.prevent="submitForm">
+            <!-- Username -->
+            <div class="flex flex-col gap-2">
+              <label for="username">Username</label>
+              <input
+                type="text"
+                v-model="formData.username"
+                name="username"
+                class="border-black border-b p-2 w-72 outline-0"
+                required
+              />
+              <p v-show="validation.isUsernameNotValid" class="text-red-500 text-center">
+                {{ validation.usernameErrMsg }}
+              </p>
+            </div>
 
-      <div class="bg-gray-50 p-12 rounded-md shadow-2xl">
-        <form class="flex flex-col gap-6" @submit.prevent="submitForm">
-          <!-- Username -->
-          <div class="flex flex-col gap-2">
-            <label for="username">Username</label>
-            <input
-              type="text"
-              v-model="formData.username"
-              name="username"
-              class="border-black border-b p-2 w-72 outline-0"
-              required
-            />
-            <p v-show="validation.isUsernameNotValid" class="text-red-500 text-center">
-              {{ validation.usernameErrMsg }}
-            </p>
-          </div>
+            <!-- Email -->
+            <div class="flex flex-col gap-2">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                v-model="formData.email"
+                name="email"
+                class="border-black border-b p-2 w-72 outline-0"
+                required
+              />
+              <p v-show="validation.isEmailNotValid" class="text-red-500 text-center">
+                {{ validation.emailErrMsg }}
+              </p>
+            </div>
 
-          <!-- Email -->
-          <div class="flex flex-col gap-2">
-            <label for="email">Email</label>
-            <input
-              type="email"
-              v-model="formData.email"
-              name="email"
-              class="border-black border-b p-2 w-72 outline-0"
-              required
-            />
-            <p v-show="validation.isEmailNotValid" class="text-red-500 text-center">
-              {{ validation.emailErrMsg }}
-            </p>
-          </div>
+            <!-- Password -->
+            <div class="flex flex-col gap-2">
+              <label for="password1">Password</label>
+              <input
+                type="password"
+                v-model="formData.password1"
+                name="password1"
+                class="border-black border-b p-2 w-72 outline-0"
+                required
+              />
+              <p v-show="validation.isPasswdNotValid" class="text-red-500 text-center">
+                {{ validation.passwordValidMsg }}
+              </p>
+            </div>
 
-          <!-- Password -->
-          <div class="flex flex-col gap-2">
-            <label for="password1">Password</label>
-            <input
-              type="password"
-              v-model="formData.password1"
-              name="password1"
-              class="border-black border-b p-2 w-72 outline-0"
-              required
-            />
-            <p v-show="validation.isPasswdNotValid" class="text-red-500 text-center">
-              {{ validation.passwordValidMsg }}
-            </p>
-          </div>
+            <!-- Confirm Password -->
+            <div class="flex flex-col gap-2">
+              <label for="password2">Confirm Password</label>
+              <input
+                type="password"
+                v-model="formData.password2"
+                name="password2"
+                class="border-black border-b p-2 w-72 outline-0"
+                required
+              />
+              <p v-show="validation.doesPasswdNotMatch" class="text-red-500 text-center">
+                {{ validation.passwordErrMsg }}
+              </p>
+            </div>
 
-          <!-- Confirm Password -->
-          <div class="flex flex-col gap-2">
-            <label for="password2">Confirm Password</label>
-            <input
-              type="password"
-              v-model="formData.password2"
-              name="password2"
-              class="border-black border-b p-2 w-72 outline-0"
-              required
-            />
-            <p v-show="validation.doesPasswdNotMatch" class="text-red-500 text-center">
-              {{ validation.passwordErrMsg }}
-            </p>
-          </div>
-
-          <button
-            type="submit"
-            class="cursor-pointer bg-green-500 hover:bg-green-800 text-white py-3 rounded"
-          >
-            Create Account
-          </button>
-        </form>
-        <p class="text-center pt-4">
-          Already have an account?
-          <RouterLink to="/login" class="text-blue-500">Sign in</RouterLink>
-        </p>
-      </div>
+            <Button
+              type="submit"
+              size="lg"
+              class="cursor-pointer bg-green-500 hover:bg-green-800 text-white py-3 rounded"
+            >
+              Create Account
+            </Button>
+          </form>
+        </CardContent>
+        <CardFooter class="flex justify-center">
+          <p class="text-center pt-4">
+            Already have an account?
+            <RouterLink to="/login" class="text-blue-500">Sign in</RouterLink>
+          </p>
+        </CardFooter>
+      </Card>
     </div>
   </div>
 </template>

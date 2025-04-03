@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import dashboardIcon from '@/assets/dashboard.png'
 import { AUTH_API, COLORS, HTTP_STATUS } from '@/constants'
 import axios, { AxiosError } from 'axios'
 import Swal from 'sweetalert2'
 import { useRouter } from 'vue-router'
 import { useUsernameStore } from '@/stores/user'
 import NavBtn from '@/components/NavBtn.vue'
+import { LayoutDashboard, Route, Swords, ShieldCheck, GraduationCap } from 'lucide-vue-next'
 
 const usernameStore = useUsernameStore()
 const router = useRouter()
@@ -67,18 +67,18 @@ async function logout() {
   <div class="flex flex-col items-start border-r border-r-gray-300 w-1/8 h-[calc(100vh-60px)]">
     <div class="min-w-full grow">
       <!-- Dashboard title -->
-      <RouterLink to="/dashboard" class="flex items-center gap-x-3 py-3 border-b border-b-gray-300">
+      <div to="/dashboard" class="flex items-center gap-x-3 py-3 border-b border-b-gray-300">
         <div class="w-1"></div>
-        <img :src="dashboardIcon" class="object-contain w-5" alt="dashboard icon" />
+        <LayoutDashboard />
         <p class="font-semibold">Dashboard</p>
-      </RouterLink>
+      </div>
 
       <!-- Nav items -->
       <nav class="font-medium text-gray-500">
-        <NavBtn name="Learning Paths" icon="map-location-dot" path="/learning-paths" />
-        <NavBtn name="Challenges" icon="flag" path="/challenges" />
-        <NavBtn name="Achievements" icon="award" path="/achievements" />
-        <NavBtn name="My Progress" icon="graduation-cap" path="/progress" />
+        <NavBtn name="Learning Paths" :icon="Route" path="/learning-paths" />
+        <NavBtn name="Challenges" :icon="Swords" path="/challenges" />
+        <NavBtn name="Achievements" :icon="ShieldCheck" path="/achievements" />
+        <NavBtn name="My Progress" :icon="GraduationCap" path="/progress" />
       </nav>
     </div>
     <div

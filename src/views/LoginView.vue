@@ -5,6 +5,16 @@ import axios, { AxiosError } from 'axios'
 import Swal from 'sweetalert2'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { Button } from '@/components/ui/button'
+import { Terminal } from 'lucide-vue-next'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 
 const router = useRouter()
 const formData = ref({
@@ -69,45 +79,54 @@ async function submitForm() {
       </div>
     </div>
     <div class="flex flex-col justify-center items-center gap-3 py-20">
-      <div class="py-6 text-center">
-        <font-awesome-icon class="text-green-500 py-1 text-3xl" :icon="['fas', 'terminal']" />
-        <h1 class="font-bold text-3xl">Welcome back</h1>
-        <p class="text-gray-500">Sign in to your account to continue</p>
-      </div>
-      <div class="p-12 rounded-md shadow-2xl bg-gray-50">
-        <form class="flex flex-col gap-6" @submit.prevent="submitForm">
-          <div class="flex flex-col gap-2">
-            <label for="email">Email</label>
-            <input
-              type="email"
-              v-model="formData.email"
-              name="email"
-              class="border-black border-b p-2 w-72 outline-0"
-              required
-            />
-          </div>
-          <div class="flex flex-col gap-2">
-            <label for="password">Password</label>
-            <input
-              type="password"
-              v-model="formData.password"
-              name="password"
-              class="border-black border-b p-2 w-72 outline-0"
-              required
-            />
-          </div>
-          <button
-            type="submit"
-            class="cursor-pointer bg-green-500 hover:bg-green-700 text-white py-3 rounded"
-          >
-            Login
-          </button>
-        </form>
-        <p class="text-center pt-4">
-          Don't have an account?
-          <RouterLink to="/register" class="text-blue-500">Register</RouterLink>
-        </p>
-      </div>
+      <Card class="p-12 rounded-md shadow-2xl bg-gray-50">
+        <CardHeader>
+          <CardTitle class="flex flex-col justify-center items-center">
+            <Terminal class="text-green-500 w-10 h-10" />
+            <h1 class="font-bold text-3xl">Welcome back</h1>
+          </CardTitle>
+          <CardDescription class="flex justify-center">
+            Sign in to your account to continue
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form class="flex flex-col gap-6" @submit.prevent="submitForm">
+            <div class="flex flex-col gap-2">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                v-model="formData.email"
+                name="email"
+                class="border-black border-b p-2 w-72 outline-0"
+                required
+              />
+            </div>
+            <div class="flex flex-col gap-2">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                v-model="formData.password"
+                name="password"
+                class="border-black border-b p-2 w-72 outline-0"
+                required
+              />
+            </div>
+            <Button
+              type="submit"
+              size="lg"
+              class="cursor-pointer bg-green-500 hover:bg-green-700 text-white py-3 rounded"
+            >
+              Login
+            </Button>
+          </form>
+        </CardContent>
+        <CardFooter class="flex justify-center">
+          <p class="text-center pt-4">
+            Don't have an account?
+            <RouterLink to="/register" class="text-blue-500">Register</RouterLink>
+          </p>
+        </CardFooter>
+      </Card>
     </div>
   </div>
 </template>

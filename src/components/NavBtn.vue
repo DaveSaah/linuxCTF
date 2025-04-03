@@ -6,12 +6,17 @@
     active-class="text-black bg-gray-200"
   >
     <div class="w-1"></div>
-    <font-awesome-icon :icon="['fas', icon]" />
+    <component :is="icon" class="w-4 h-4" />
     <p>{{ name }}</p>
   </RouterLink>
 </template>
 
 <script lang="ts">
+import type { PropType } from 'vue'
+import type { LucideProps } from 'lucide-vue-next'
+import type { FunctionalComponent } from 'vue'
+type LucideIcon = FunctionalComponent<LucideProps, {}, any, {}>
+
 export default {
   name: 'NavBtn',
   props: {
@@ -24,7 +29,7 @@ export default {
       required: true,
     },
     icon: {
-      type: String,
+      type: Function as PropType<LucideIcon>,
       required: true,
     },
   },

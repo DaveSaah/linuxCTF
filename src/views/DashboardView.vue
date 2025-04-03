@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import NavBar from '@/components/NavBar.vue'
+import { UsersRound, Terminal, BookOpen } from 'lucide-vue-next'
 </script>
 
 <template>
@@ -7,19 +8,21 @@ import NavBar from '@/components/NavBar.vue'
     class="fixed top-0 left-0 right-0 z-10 flex items-center p-4 border-b border-b-gray-300 justify-between"
   >
     <div class="flex items-center gap-x-3">
-      <font-awesome-icon :icon="['fas', 'terminal']" />
+      <Terminal class="w-6 h-6" />
       <p class="font-bold text-lg">Linux CTF Learning Platform</p>
     </div>
     <div class="flex items-center gap-x-3">
       <button
         class="flex gap-x-5 items-center border py-1 px-2 rounded-md border-gray-300 text-sm hover:bg-gray-100 cursor-pointer"
       >
-        <font-awesome-icon :icon="['fas', 'user-group']" />Community
+        <UsersRound class="w-4 h-4" />
+        Community
       </button>
       <button
         class="flex gap-x-5 items-center border py-1 px-2 rounded-md border-gray-300 text-sm hover:bg-gray-100 cursor-pointer"
       >
-        <font-awesome-icon :icon="['fas', 'book-open']" />Resources
+        <BookOpen class="w-4 h-4" />
+        Resources
       </button>
     </div>
   </header>
