@@ -1,21 +1,33 @@
 <script setup lang="ts">
 import InfoCard from '@/components/InfoCard.vue'
-import { Flag, Trophy, Award } from 'lucide-vue-next'
-import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Flag, Trophy, Award, Code, Server, Terminal, ChevronRight } from 'lucide-vue-next'
+import { Card, CardDescription, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { Progress } from '@/components/ui/progress'
 
 const infos = {
   completedChallenges: {
-    title: 'Completed Challenges',
-    content: '12/18',
+    title: 'Your Progress',
+    content: '1/18', // solved challenges/total challenges
     icon: Flag,
-    subtitle: '+2 from last week',
+    subtitle: 'Just getting started', 
   },
   currentLevel2: {
     title: 'Current Level',
-    content: 'Level 2',
+    content: 'Newbie', // user level nickname
     icon: Trophy,
-    subtitle: '3 challenges to level 3',
+    subtitle: '3 challenges to Apprentice', // number of challenges to next level
   },
+  // Challenge nicknames
+  // 1 - Newbie – just getting started
+  // 2 - Apprentice – learning the ropes
+  // 3 - Adept – growing in skill
+  // 4 - Seer – gaining insight
+  // 5 - Invoker – can conjure clever solutions
+  // 6 - Spellbreaker – cracks tough problems
+  // 7 - Shadowmancer – thrives in the dark corners of the system
+  // 8 - Wizard – commands power with precision
+  // 9 - Architect – builds systems with mastery
+  // 10 - Rootmaster – total control, deep understanding
   learningStreak: {
     title: 'Learning Streak',
     content: '7 days',
@@ -23,6 +35,36 @@ const infos = {
     subtitle: 'Keep it up!',
   },
 }
+
+// status options = ['Completed', 'In Progress', 'Locked']
+const learningPath = [
+  { id: 1, name: 'Command Line Basics', status: 'In Progress' },
+  { id: 2, name: 'File System Navigation', status: 'Locked' },
+  { id: 3, name: 'User Management & Permissions', status: 'Locked' },
+  { id: 4, name: 'Networking Fundamentals', status: 'Locked' },
+  { id: 5, name: 'Shell Scripting', status: 'Locked' },
+]
+
+const overallProgress = 10 // solved/total * 100%
+
+// all skill level have 3 recommended challenges
+const recommendedChallenges = [
+  {
+    title: 'Permission Puzzle',
+    description: 'Fix file permissions to access a hidden flag',
+    icon: Code,
+  },
+  {
+    title: 'Process Detective',
+    description: 'Identify and manage system processes',
+    icon: Server,
+  },
+  {
+    title: 'Regex Ranger',
+    description: 'Use grep and regex to find hidden messages',
+    icon: Terminal,
+  },
+]
 </script>
 
 <template>
@@ -37,17 +79,78 @@ const infos = {
     />
   </div>
   <div class="flex gap-x-6 py-12">
-    <Card class="w-3/5">
+    <Card class="w-1/2">
       <CardHeader>
-        <CardTitle> Your Learning Journey </CardTitle>
-        <CardDescription>Track your progress through the linux mastery path</CardDescription>
+        <CardTitle>Your Learning Journey</CardTitle>
+        <CardDescription>Track your progress through the Linux mastery path</CardDescription>
       </CardHeader>
+      <CardContent>
+        <div class="flex items-center justify-between pb-2">
+          <div class="text-sm font-medium">Overall Progress</div>
+          <div class="text-sm font-medium">{{ overallProgress }}%</div>
+        </div>
+        <div class="pb-5">
+          <Progress v-model="overallProgress" class="h-2" />
+          <!-- <Progress v-model="overallProgress" class="h-2" color="bg-blue-500" /> -->
+        </div>
+
+        <div class="space-y-4">
+          <div
+            v-for="item in learningPath"
+            :key="item.id"
+            class="flex items-center justify-between py-3"
+          >
+            <div class="flex items-center">
+              <div
+                class="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center mr-3 text-sm font-medium"
+              >
+                {{ item.id }}
+              </div>
+              <span class="font-medium px-3" :class="{ 'text-gray-500': item.status === 'Locked' }">
+                {{ item.name }}
+              </span>
+            </div>
+            <div>
+              <span
+                class="px-3 py-1 rounded-full text-xs font-bold"
+                :class="{
+                  'bg-green-100 text-green-800': item.status === 'Completed',
+                  'bg-yellow-100 text-yellow-800': item.status === 'In Progress',
+                  'text-gray-500 border border-gray-300': item.status === 'Locked',
+                }"
+              >
+                {{ item.status }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </CardContent>
     </Card>
-    <Card class="w-3/5">
+    <Card class="w-1/2">
       <CardHeader>
-        <CardTitle> Recommended Challenges </CardTitle>
+        <CardTitle>Recommended Challenges</CardTitle>
         <CardDescription>Based on your current skill level</CardDescription>
       </CardHeader>
+      <CardContent>
+        <div class="space-y-4">
+          <div
+            v-for="challenge in recommendedChallenges"
+            :key="challenge.title"
+            class="flex justify-between items-center p-2 rounded-md hover:bg-gray-100 cursor-pointer"
+          >
+            <div class="flex items-center">
+              <div class="w-12 h-12 bg-gray-100 rounded-full mr-4 flex items-center justify-center">
+                <component :is="challenge.icon" />
+              </div>
+              <div class="px-4">
+                <div class="font-medium">{{ challenge.title }}</div>
+                <div class="text-sm text-gray-500">{{ challenge.description }}</div>
+              </div>
+            </div>
+            <ChevronRight />
+          </div>
+        </div>
+      </CardContent>
     </Card>
   </div>
 </template>
