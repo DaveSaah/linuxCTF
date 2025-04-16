@@ -1,5 +1,5 @@
 <template>
-  <div class="p-6 border border-gray-300 rounded-lg w-1/4">
+  <div class="p-6 border border-gray-300 rounded-lg w-1/4 bg-white">
     <div class="flex justify-between font-semibold text-gray-800 text-sm pb-2">
       <p>{{ title }}</p>
       <component :is="icon" />

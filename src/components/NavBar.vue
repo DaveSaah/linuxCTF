@@ -5,7 +5,7 @@ import Swal from 'sweetalert2'
 import { useRouter } from 'vue-router'
 import { useUsernameStore } from '@/stores/user'
 import NavBtn from '@/components/NavBtn.vue'
-import { LayoutDashboard, Route, Swords, ShieldCheck, GraduationCap } from 'lucide-vue-next'
+import { LayoutDashboard, Route, Swords, ShieldCheck, GraduationCap, LogOut } from 'lucide-vue-next'
 
 const usernameStore = useUsernameStore()
 const router = useRouter()
@@ -85,7 +85,7 @@ async function logout() {
       class="flex gap-x-3 items-center py-4 cursor-pointer justify-center w-full bg-black text-white hover:bg-gray-900"
       @click="logout"
     >
-      <font-awesome-icon :icon="['fas', 'arrow-right-from-bracket']" />
+      <LogOut />
       <p>Logout</p>
     </div>
   </div>
