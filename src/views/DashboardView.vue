@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import NavBar from '@/components/NavBar.vue'
-import { UsersRound, Terminal, BookOpen } from 'lucide-vue-next'
+import { UsersRound, Terminal, } from 'lucide-vue-next'
 </script>
 
 <template>
@@ -11,25 +11,18 @@ import { UsersRound, Terminal, BookOpen } from 'lucide-vue-next'
       <Terminal class="w-6 h-6" />
       <p class="font-bold text-lg">Linux CTF Learning Platform</p>
     </div>
-    <div class="flex items-center gap-x-3">
-      <button
-        class="flex gap-x-5 items-center border py-1 px-2 rounded-md border-gray-300 text-sm hover:bg-gray-100 cursor-pointer"
-      >
-        <UsersRound class="w-4 h-4" />
-        Community
-      </button>
-      <button
-        class="flex gap-x-5 items-center border py-1 px-2 rounded-md border-gray-300 text-sm hover:bg-gray-100 cursor-pointer"
-      >
-        <BookOpen class="w-4 h-4" />
-        Resources
-      </button>
-    </div>
+    <a
+      class="flex gap-x-5 items-center border py-1 px-2 rounded-md border-gray-300 text-sm
+      hover:bg-gray-100 cursor-pointer" href="" target="_blank"
+    >
+      <UsersRound class="w-4 h-4" />
+      Community
+    </a>
   </header>
 
   <div class="flex pt-[60px]">
     <NavBar class="fixed left-0 top-[60px]" />
-    <div class="flex-1 overflow-y-auto h-[calc(100vh-60px)] scroll-smooth main p-6">
+    <div class="flex-1 overflow-y-auto h-[calc(100vh-60px)] scroll-smooth main p-6 bg-gray-50">
       <RouterView />
     </div>
   </div>
