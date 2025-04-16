@@ -14,7 +14,7 @@ import { Badge } from '@/components/ui/badge'
 </script>
 
 <template>
-  <div class="flex justify-between items-center pb-10">
+  <header class="flex justify-between items-center pb-10">
     <div>
       <h1 class="font-bold text-3xl">Challenges</h1>
       <p class="text-gray-500">Explore and solve Linux challenges to improve your skills</p>
@@ -27,7 +27,7 @@ import { Badge } from '@/components/ui/badge'
       <Trophy class="w-4 h-4" />
       My Submissions
     </a>
-  </div>
+  </header>
   <!-- search functionality for future  -->
   <Tabs default-value="all" class="w-full">
     <TabsList class="grid w-1/2 grid-cols-3">
