@@ -5,7 +5,7 @@ import Swal from 'sweetalert2'
 import { useRouter } from 'vue-router'
 import { useUsernameStore } from '@/stores/user'
 import NavBtn from '@/components/NavBtn.vue'
-import { LayoutDashboard, Route, Swords, ShieldCheck, GraduationCap, LogOut } from 'lucide-vue-next'
+import { LayoutDashboard, Route, Swords, ShieldCheck, LogOut } from 'lucide-vue-next'
 
 const usernameStore = useUsernameStore()
 const router = useRouter()
@@ -78,7 +78,6 @@ async function logout() {
         <NavBtn name="Learning Paths" :icon="Route" path="/learning-paths" />
         <NavBtn name="Challenges" :icon="Swords" path="/challenges" />
         <NavBtn name="Achievements" :icon="ShieldCheck" path="/achievements" />
-        <NavBtn name="My Progress" :icon="GraduationCap" path="/progress" />
       </nav>
     </div>
     <div

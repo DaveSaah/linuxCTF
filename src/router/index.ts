@@ -93,12 +93,6 @@ const router = createRouter({
           beforeEnter: requireAuth,
           component: () => import('@/views/AchievementsView.vue'),
         },
-        {
-          path: '/progress',
-          name: 'progress',
-          beforeEnter: requireAuth,
-          component: () => import('@/views/ProgressView.vue'),
-        }
       ],
     },
   ],
