@@ -1,40 +1,20 @@
 <script setup lang="ts">
-import InfoCard from '@/components/InfoCard.vue'
-import { Flag, Trophy, Award, Code, Server, Terminal, ChevronRight } from 'lucide-vue-next'
+import { Code, Server, Terminal, ChevronRight } from 'lucide-vue-next'
 import { Card, CardDescription, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
+import { Badge } from '@/components/ui/badge'
 
-const infos = {
-  completedChallenges: {
-    title: 'Your Progress',
-    content: '1/18', // solved challenges/total challenges
-    icon: Flag,
-    subtitle: 'Just getting started', 
-  },
-  currentLevel2: {
-    title: 'Current Level',
-    content: 'Newbie', // user level nickname
-    icon: Trophy,
-    subtitle: '3 challenges to Apprentice', // number of challenges to next level
-  },
-  // Challenge nicknames
-  // 1 - Newbie – just getting started
-  // 2 - Apprentice – learning the ropes
-  // 3 - Adept – growing in skill
-  // 4 - Seer – gaining insight
-  // 5 - Invoker – can conjure clever solutions
-  // 6 - Spellbreaker – cracks tough problems
-  // 7 - Shadowmancer – thrives in the dark corners of the system
-  // 8 - Wizard – commands power with precision
-  // 9 - Architect – builds systems with mastery
-  // 10 - Rootmaster – total control, deep understanding
-  learningStreak: {
-    title: 'Learning Streak',
-    content: '7 days',
-    icon: Award,
-    subtitle: 'Keep it up!',
-  },
-}
+// Challenge nicknames
+// 1 - Newbie – just getting started
+// 2 - Apprentice – learning the ropes
+// 3 - Adept – growing in skill
+// 4 - Seer – gaining insight
+// 5 - Invoker – can conjure clever solutions
+// 6 - Spellbreaker – cracks tough problems
+// 7 - Shadowmancer – thrives in the dark corners of the system
+// 8 - Wizard – commands power with precision
+// 9 - Architect – builds systems with mastery
+// 10 - Rootmaster – total control, deep understanding
 
 // status options = ['Completed', 'In Progress', 'Locked']
 const learningPath = [
@@ -68,15 +48,47 @@ const recommendedChallenges = [
 </script>
 
 <template>
-  <div class="flex justify-center gap-x-4">
-    <InfoCard
-      v-for="info in infos"
-      :key="info.title"
-      :title="info.title"
-      :content="info.content"
-      :icon="info.icon"
-      :subtitle="info.subtitle"
-    />
+  <header class="flex flex-col pb-10">
+    <h1 class="font-bold text-3xl">Learning Paths</h1>
+    <p class="text-gray-500">Explore structured learning paths to master Linux skills</p>
+  </header>
+  <div class="bg-gradient-to-r from-gray-300 to-white p-5 rounded-lg">
+    <div class="flex justify-between">
+      <div class="flex flex-col">
+        <h1 class="capitalize font-bold text-xl">your learning journey</h1>
+        <p class="font-light text-gray-600">
+          Track your progress through all Linux learning paths.
+        </p>
+      </div>
+      <div>
+        <Badge variant="secondary" class="font-bold border shadow-xl text-sm">2/20 modules completed</Badge>
+      </div>
+    </div>
+
+    <div class="flex justify-between items-center py-4">
+      <div class="flex justify-between w-3/4">
+        <div class="text-sm font-medium">Overall Progress</div>
+        <div class="text-sm font-medium">{{ overallProgress }}%</div>
+      </div>
+      <div class="flex gap-x-5 justify-start items-center">
+        <div class="flex justify-center items-center gap-x-2">
+          <svg width="14" height="14" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="7" cy="7" r="7" fill="green" />
+          </svg>
+          Completed (2)
+        </div>
+        <div class="flex justify-center items-center gap-x-2">
+          <svg width="14" height="14" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="7" cy="7" r="7" fill="yellow" />
+          </svg>
+          Todo (4)
+        </div>
+      </div>
+    </div>
+    <div class="w-3/4">
+      <Progress v-model="overallProgress" class="h-3" />
+      <!-- <Progress v-model="overallProgress" class="h-2" color="bg-blue-500" /> -->
+    </div>
   </div>
   <div class="flex gap-x-6 py-12">
     <Card class="w-1/2">
@@ -85,15 +97,6 @@ const recommendedChallenges = [
         <CardDescription>Track your progress through the Linux mastery path</CardDescription>
       </CardHeader>
       <CardContent>
-        <div class="flex items-center justify-between pb-2">
-          <div class="text-sm font-medium">Overall Progress</div>
-          <div class="text-sm font-medium">{{ overallProgress }}%</div>
-        </div>
-        <div class="pb-5">
-          <Progress v-model="overallProgress" class="h-2" />
-          <!-- <Progress v-model="overallProgress" class="h-2" color="bg-blue-500" /> -->
-        </div>
-
         <div class="space-y-4">
           <div
             v-for="item in learningPath"
