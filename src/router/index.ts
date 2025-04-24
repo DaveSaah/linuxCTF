@@ -93,6 +93,12 @@ const router = createRouter({
           beforeEnter: requireAuth,
           component: () => import('@/views/AchievementsView.vue'),
         },
+        {
+          path: '/challenge/:id',
+          name: 'challenge',
+          beforeEnter: requireAuth,
+          component: () => import('@/views/ChallengeView.vue'),
+        },
       ],
     },
   ],
