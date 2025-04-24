@@ -22,7 +22,7 @@ import { UsersRound, Terminal, } from 'lucide-vue-next'
 
   <div class="flex pt-[60px]">
     <NavBar class="fixed left-0 top-[60px]" />
-    <div class="flex-1 overflow-y-auto h-[calc(100vh-60px)] scroll-smooth main p-6 bg-gray-50">
+    <div class="flex-1 overflow-y-auto h-[calc(100vh-60px)] scroll-smooth main p-6">
       <RouterView />
     </div>
   </div>
