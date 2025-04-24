@@ -29,16 +29,8 @@ async function logout() {
       const response = await axios.get(AUTH_API.LOGOUT, { withCredentials: true })
 
       if (response.status === HTTP_STATUS.OK) {
-        // Show success message
-        await Swal.fire({
-          title: 'Logged Out!',
-          text: response.data.message,
-          icon: 'success',
-          confirmButtonColor: COLORS.SUCCESS,
-        }).then(() => {
-          usernameStore.$dispose()
-          router.push('/login')
-        })
+        usernameStore.$dispose()
+        router.push('/login')
       }
     } catch (error) {
       const axiosError = error as AxiosError<{ message: string }>

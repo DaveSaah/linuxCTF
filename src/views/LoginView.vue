@@ -36,15 +36,8 @@ async function submitForm() {
       },
     )
     if (response.status === HTTP_STATUS.OK) {
-      Swal.fire({
-        icon: 'success',
-        title: 'Login Successful!',
-        text: 'Welcome to LinuxCTF',
-        confirmButtonColor: COLORS.SUCCESS,
-      }).then(() => {
-        usernameStore.setUsername(response.data.username)
-        router.push('/dashboard')
-      })
+      usernameStore.setUsername(response.data.username)
+      router.push('/dashboard')
     }
   } catch (error) {
     const axiosError = error as AxiosError<{ message: string }>
